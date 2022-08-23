@@ -16,12 +16,6 @@ function postData(url, data) {
         .then(response => response.json()) // 輸出成 json
 }
 
-function predictType(result){
-    if(result==0)
-        return  '此客戶短期內不會流失';
-    else
-        return '此客戶很有可能會流失';
-}
 
 
 // var year1;
@@ -29,7 +23,14 @@ function predictType(result){
 // var partner;
 // var depen;
 
-function submit(){
+function predictType(result){
+    if(result==0)
+        return  '此客戶短期內不會流失';
+    else
+        return '此客戶很有可能會流失';
+}
+
+function pred(){
     // 除錯，不得為空值，一旦有誤，就結束function不會做預測(這邊還沒處理好)
     if(document.getElementById("gender").value.length == 0)
     {
@@ -99,11 +100,7 @@ function submit(){
     var m_box = document.getElementById("movie"); 
     if (m_box.checked==true){movie = 1};
 
-    // 計算月費，每一個額外服務是10元美金(這邊只是PoC)
-    const charge = Number(document.querySelector('input[name="ch"]:checked').value) + (security+backup+protection+support+tv+movie)*10
-    
-    
-    
+
     // 電話服務、網路的除錯，一旦有誤，就結束function不會做預測
     if (phone==0 & multiline==1){
         alert("客戶沒有辦理電話服務，請再確認「是否辦理多條電話線」");
@@ -114,6 +111,15 @@ function submit(){
         return;
     }
 
+
+    // 計算月費，每一個額外服務是10元美金(這邊只是PoC)
+    const charge = Number(document.querySelector('input[name="ch"]:checked').value) + (security+backup+protection+support+tv+movie)*10
+    // 利用迴歸式來計算客戶停留時間
+    const t = 1.17282 + 0.05372*senior + 0.11718*partner - 0.05134*phone + 0.15426*multiline + 0.05033*fiber
+              + 0.05712*noInternet + 0.26347*year1 + 0.38546*year2 + 0.12742*security + 0.14223*backup + 0.08172*protection
+              + 0.08769*tv + 0.09021*movie - 0.0687*mail + 0.10535*(1-elect-mail) 
+    // 加次方，四捨五入
+    const tenure = Math.round(Math.pow(t, 1/0.182))
     
     // 結果輸出成json格式
     const data = {
@@ -142,8 +148,8 @@ function submit(){
     
     // console.log(data);  這邊的用途在於測試
     
-    // 如果要用local測試的話，記得要先去run後端的程式碼，這裡才跑得動
-    // postData('http://127.0.0.1:3000/predict', data) 這一行是 local 
+    // 如果要用local測試的話，記得要先去run後端的程式碼，這裡才跑得動，下面這一行是 local 
+    // postData('http://127.0.0.1:3000/predict', data) 
 
     // 下面這一行是我把後端部屬到heroku
     postData('https://telco-customer-churn-alice.herokuapp.com/predict', data)
@@ -152,8 +158,13 @@ function submit(){
         console.log(data);
         console.log(result);
         console.log(predictType(result));
-        alert(predictType(result))   
+        if (result==0){
+            alert(predictType(result)) 
+        } else{alert(predictType(result) + "\n預計停留的時間為"+ String(tenure) + "個月")}    
     })
+
+
+
 
     // 分群
     if(year1==0 && year2==0){
@@ -165,6 +176,12 @@ function submit(){
     } 
 }
 
-
+function submit(){
+    if(document.getElementById("name").value.length == 0){
+        alert("請輸入姓名~");
+        return;
+    }
+    window.open('subPage.html')
+}
 
 // document.getElementById('resultText').innerHTML=predictType(result);

@@ -9,23 +9,22 @@
 		table{
 				margin-left:auto; 
 				margin-right:auto;
-				
-				
 			}
-		th, td{
-			border: 1px solid black;
-			border-collapse: collapse;
 
+		.subtitle{
+			color:royalblue; 
+			font-weight:bold; 
+			text-align:center;
 		}
-			
 	</style> 
+
 	<script src='main.js'></script>
 </head>
 
 <body>
 <!-- <form method="post"> -->
 	<div>
-	<table style="border:3px RoyalBlue solid;" cellpadding="10">
+	<table style="border:3px RoyalBlue solid;padding:5px;" rules="all" cellpadding='8';>
 		<thead style="background-color:RoyalBlue;"">
 			<tr>
 				<th colspan="3"><h2 style="color:aliceblue;">客戶基本資料</h2></th>
@@ -34,14 +33,14 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td rowspan="4">
+				<td rowspan="2">
 				<figure>	
-					<img src="mis.png" alt="個人照片">
-					<figcaption></figcaption>
+					<img src="mis.png" > 
+					<figcaption class="subtitle">個人照片</figcaption>
 				</figure>
 				</td>
 				<td colspan="2"><label>姓名：
-					<input name="name" type="text" size="25" maxlength="30">
+					<input id="name" name="name" type="text" size="25" maxlength="30">
 					</label><br>
 					<label>
 					性別：
@@ -69,47 +68,50 @@
 
 
 			<tr>
-				<td colspan="2">合約租期：
+				<td class="subtitle">合約租期</td>
+				<td colspan="2">
 					<input type="radio" name="contract" value="month">一個月
 					<input type="radio" name="contract" value="year1">一年
 					<input type="radio" name="contract" value="year2">兩年	
 
 				</td>
 			</tr>
+
 			<tr>
-				<td colspan="2">
-			
-					<label>是否辦理電話服務：
-						<input type="radio" name="ph" id="phone" value=1>是
-						<input type="radio" name="ph" id="phone" value=0>否
-					</label><br>
-					<label>是否辦理多條電話線：
-						<input type="radio" name='mul' id="multiline" value=1>是
-						<input type="radio" name="mul" id="multiline" value=0>否
-					</label>
-				</td>
-			<tr>
-				<td>基本方案</td>
+				<td class="subtitle">基本方案</td>
 				<td colspan="2">
 					<input type="radio" name="ch" id="charge" value=20>每月 USD$20
 					<input type="radio" name="ch" id="charge" value=50>每月 USD$50
 					<input type="radio" name="ch" id="charge" value=80>每月 USD$80
 					<input type="radio" name="ch" id="charge" value=110>每月 USD$110
 				</td>
-				
+			</tr>
+
+			<tr><td class="subtitle">電話服務</td>
+				<td colspan="2">
+					<label>是否辦理電話服務：
+						<input type="radio" name="ph" id="phone" value=1>是
+						<input type="radio" name="ph" id="phone" value=0>否
+					</label><br>
+					<label>是否辦理多個門號：
+						<input type="radio" name='mul' id="multiline" value=1>是
+						<input type="radio" name="mul" id="multiline" value=0>否
+					</label>
+				</td>
+			</tr>
+
 			<tr>
-				<td>網路辦理</td>
+				<td class="subtitle">網路辦理</td>
 				<td colspan="2">
 					<input type="radio" id="internet" name="internet" value="fiber">光纖
 					<input type="radio" id="internet" name="internet" value="dsl">數位網路
 					<input type="radio" id="internet" name="internet" value="noInternet">無辦理服務
 				</td>
+			</tr>
 
+			
 			<tr>
-				
-			<tr>
-			<tr>
-				<td>加購網路相關服務</td>
+				<td class="subtitle">加購網路相關服務</td>
 				<td colspan="2">
 					<input type="checkbox" name="extra" id="security" value="security">網路安全
 					<input type="checkbox" name="extra" id="backup" value="backup">網路備份
@@ -119,33 +121,39 @@
 					<input type="checkbox" name="extra" id="tv" value="tv">串流電視
 					<input type="checkbox" name="extra" id="movie" value=1>串流電影
 				</td>
+			</tr>
+
 			<tr>
-				<td>付款方式</td>
+				<td class="subtitle">付款方式</td>
 				<td colspan="2">
 					<input type="radio" name="payment" value="bank">銀行自動轉帳
 					<input type="radio" name="payment" id="credit" value="credit">信用卡自動扣款
 					<input type="radio" name="payment" id="elect" value="elect">電子支票
 					<input type="radio" name="payment" id="mail" value="mail">郵寄支票
 			
-					<br>是否申辦無紙化帳單:
+					<br>是否申辦無紙化帳單：
 					<input type="radio" name="nopaper" id="paper" value=1>是
 					<input type="radio" name="nopaper" id="paper" value=0>否
 				</td>
 			</tr>
+
 			<tr>
-				<td>備註</td>
+				<td class="subtitle">備註</td>
 				<td colspan="2">
 					<textarea cols="50">客戶特殊需求</textarea>
 				</td>
 			</tr>
+
 			<tr>
 				<td colspan="3">
-					<!-- <button onclick="alertEvent()">預測</button> -->
-					<button onclick="submit()">預測</button>
-					<input type="button" name="Submit" value="提交" class="btn" onclick="window.open('subPage.html')" />
+					<button onclick="pred()">預測</button>
+					<button onclick="submit()">提交</button>
+
+					<!-- <input type="button" name="Submit" value="提交" class="btn" onclick="submit()" /> -->
 
 				</td>
-			</tr>		
+			</tr>	
+
 		</tbody>
 	</table>
 	</div>
