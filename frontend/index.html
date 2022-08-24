@@ -6,18 +6,19 @@
 	<title>電信客戶流失</title>
 	
 	<style>
+		/* 讓表格置中 */
 		table{
 				margin-left:auto; 
 				margin-right:auto;
 			}
-
+		
+		/* 設定一些格式 */
 		.subtitle{
 			color:royalblue; 
 			font-weight:bold; 
 			text-align:center;
 		}
 	</style> 
-
 	<script src='main.js'></script>
 </head>
 
@@ -31,8 +32,8 @@
 			<tr>
 				<th colspan="3"><h2 style="color:aliceblue;">客戶基本資料</h2></th>
 			</tr>
-		
 		</thead>
+
 		<tbody>
 			<tr>
 				<td rowspan="2">
@@ -142,7 +143,7 @@
 			<tr>
 				<td class="subtitle">備註</td>
 				<td colspan="2">
-					<textarea cols="50">客戶特殊需求</textarea>
+					<textarea cols="50" name="note" placeholder="客戶特殊需求"></textarea>
 				</td>
 			</tr>
 
@@ -154,7 +155,6 @@
 					<br><br><font size="2">親愛的業務，如您發現點擊「預測」按鈕一直無反應，請再次確認每一格是否都有填寫。</font>					
 				</td>
 			</tr>	
-
 		</tbody>
 	</table>
 </form>
@@ -163,5 +163,4 @@
 
 </body>
 <script src="./js/index.js"></script>
-
 </html>

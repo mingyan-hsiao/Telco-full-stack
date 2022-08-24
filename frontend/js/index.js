@@ -1,3 +1,4 @@
+// 這個function不要動它
 function postData(url, data) {
     // Default options are marked with *
     return fetch(url, {
@@ -16,11 +17,12 @@ function postData(url, data) {
         .then(response => response.json()) // 輸出成 json
 }
 
-
+// 確認完沒有空值之後，才會提交跳轉畫面
 function beforeSubmit(){
     window.open('subPage.html');
     }
 
+// 預測結果轉為可讀的文字
 function predictType(result){
     if(result==0)
         return  '此客戶短期內不會流失';
@@ -29,29 +31,29 @@ function predictType(result){
 }
 
 
-
 // 除錯，不得為空值，一旦有誤，就結束function不會做預測
-// function empty(){
-//     if(document.getElementById("name").value.length == 0 ||
-//     document.getElementById("gender")== null ||
-//     document.getElementById("partner")== null ||
-//     document.getElementById("depen").value.length == 0 ||
-//     document.getElementById("senior").value.length == 0 ||
-//     document.getElementById("contract").value.length == 0 ||
-//     document.getElementById("charge").value.length == 0 ||
-//     document.getElementById("phone").value.length == 0 ||
-//     document.getElementById("multiline").value.length == 0 ||
-//     document.getElementById("internet").value.length == 0 ||
-//     document.getElementById("payment").value.length == 0 ||
-//     document.getElementById("paper").value.length == 0){return 1
-//     }else{return 0}
-// }
+function empty(){
+    if(document.getElementById("name").value.length == 0 ||
+    document.getElementById("gender")== null ||
+    document.getElementById("partner")== null ||
+    document.getElementById("depen").value.length == 0 ||
+    document.getElementById("senior").value.length == 0 ||
+    document.getElementById("contract").value.length == 0 ||
+    document.getElementById("charge").value.length == 0 ||
+    document.getElementById("phone").value.length == 0 ||
+    document.getElementById("multiline").value.length == 0 ||
+    document.getElementById("internet").value.length == 0 ||
+    document.getElementById("payment").value.length == 0 ||
+    document.getElementById("paper").value.length == 0){return 1
+    }else{return 0}
+}
 
+// 不知道為什麼它好像只偵測的出來name空值
 function pred(){
-    // if (empty() == 1){ 
-    //     alert("有空值!");  	
-    //     return; 
-    // } 
+    if (empty() == 1){ 
+        alert("有空值!");  	
+        return; 
+    } 
 
     // 二擇一的旋鈕
     const gender = Number(document.querySelector('input[name="gender"]:checked').value);
@@ -156,7 +158,6 @@ function pred(){
     
     // 下面這一行是 local，如果要用local測試的話，記得要先去run後端的程式碼，這裡才跑得動
     // postData('http://127.0.0.1:3000/predict', data) 
-
     // 改成把後端部屬到GCP的VM降低延遲，提高scaling能力，但目前VM的問題還沒解決
     // postData('http://34.173.192.9/predict', data)
 
@@ -183,8 +184,5 @@ function pred(){
 
 }
 
-// function myfun() {
-//     if( beforeSubmit(form)==true){window.open('subPage.html')}
 
-//     } 
 
