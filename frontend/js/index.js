@@ -17,11 +17,9 @@ function postData(url, data) {
 }
 
 
-
-// var year1;
-// var year2;
-// var partner;
-// var depen;
+function beforeSubmit(){
+    window.open('subPage.html');
+    }
 
 function predictType(result){
     if(result==0)
@@ -30,22 +28,30 @@ function predictType(result){
         return '此客戶很有可能會流失';
 }
 
+
+
+// 除錯，不得為空值，一旦有誤，就結束function不會做預測
+// function empty(){
+//     if(document.getElementById("name").value.length == 0 ||
+//     document.getElementById("gender")== null ||
+//     document.getElementById("partner")== null ||
+//     document.getElementById("depen").value.length == 0 ||
+//     document.getElementById("senior").value.length == 0 ||
+//     document.getElementById("contract").value.length == 0 ||
+//     document.getElementById("charge").value.length == 0 ||
+//     document.getElementById("phone").value.length == 0 ||
+//     document.getElementById("multiline").value.length == 0 ||
+//     document.getElementById("internet").value.length == 0 ||
+//     document.getElementById("payment").value.length == 0 ||
+//     document.getElementById("paper").value.length == 0){return 1
+//     }else{return 0}
+// }
+
 function pred(){
-    // 除錯，不得為空值，一旦有誤，就結束function不會做預測(這邊還沒處理好)
-    if(document.getElementById("gender").value.length == 0)
-    {
-        alert("empty");
-        return;
-    }
-    // if(document.querySelector('input[name="gender"]:checked').value.length == 0)
-    // {
-    //     alert("empty")
-    //     return;
-    // }
-    // if (document.querySelector('input[name="gender"]:checked').value==null) {
-    // alert("請再確認每一格都有填寫~");
-    // return;
-    // }
+    // if (empty() == 1){ 
+    //     alert("有空值!");  	
+    //     return; 
+    // } 
 
     // 二擇一的旋鈕
     const gender = Number(document.querySelector('input[name="gender"]:checked').value);
@@ -151,8 +157,8 @@ function pred(){
     // 下面這一行是 local，如果要用local測試的話，記得要先去run後端的程式碼，這裡才跑得動
     // postData('http://127.0.0.1:3000/predict', data) 
 
-    //改成把後端部屬到GCP的VM降低延遲，提高scaling能力
-    postData('http://34.173.192.9/predict', data)
+    // 改成把後端部屬到GCP的VM降低延遲，提高scaling能力，但目前VM的問題還沒解決
+    // postData('http://34.173.192.9/predict', data)
 
     // 下面這一行是我把後端部屬到heroku
     postData('https://telco-customer-churn-alice.herokuapp.com/predict', data)
@@ -166,9 +172,6 @@ function pred(){
         } else{alert(predictType(result) + "\n預計停留的時間為"+ String(tenure) + "個月")}    
     })
 
-
-
-
     // 分群
     if(year1==0 && year2==0){
         alert("經過分群，此客戶屬於「喜歡嘗試型」，建議三個月後可以提出提前續約福利專案，依其最常使用的服務做優惠折扣。")
@@ -177,15 +180,11 @@ function pred(){
     } else{
         alert("經過分群，此客戶屬於「經典型」，建議可以持續關注顧客滿意度。")
     } 
+
 }
 
-function myfun() {
-    window.open('subPage.html')}
+// function myfun() {
+//     if( beforeSubmit(form)==true){window.open('subPage.html')}
 
-function required(inputtx) {
-    if (inputtx.value.length == 0){ 
-        alert("message");  	
-        return false; 
-    }  	
-    return true; 
-    } 
+//     } 
+
