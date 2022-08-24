@@ -22,7 +22,9 @@
 </head>
 
 <body>
-<!-- <form method="post"> -->
+<form name="form1" method="post" 
+      action="https://script.google.com/macros/s/AKfycbzVBri7Sd_7Jwf-iheVY0t8TDlYDE2Enh4uD0W4is620aJiry30WzGhyUqFU4nvegnq/exec"
+	  onsubmit="required()"> 
 	<div>
 	<table style="border:3px RoyalBlue solid;padding:5px;" rules="all" cellpadding='8';>
 		<thead style="background-color:RoyalBlue;"">
@@ -40,12 +42,12 @@
 				</figure>
 				</td>
 				<td colspan="2"><label>姓名：
-					<input id="name" name="name" type="text" size="25" maxlength="30">
+					<input id="name" name="name" type="text" size="25" maxlength="30" required>
 					</label><br>
 					<label>
 					性別：
-					<input type="radio" id="gender" name="gender" value=1>男性
-					<input type="radio" id="gender" name="gender" value=0>女性
+					<input type="radio" id="gender" name="gender" value=1 required>男性
+					<input type="radio" id="gender" name="gender" value=0 required>女性
 					</label>
 				</td>
 			</tr>
@@ -80,22 +82,22 @@
 			<tr>
 				<td class="subtitle">基本方案</td>
 				<td colspan="2">
-					<input type="radio" name="ch" id="charge" value=20>每月 USD$20
-					<input type="radio" name="ch" id="charge" value=50>每月 USD$50
-					<input type="radio" name="ch" id="charge" value=80>每月 USD$80
-					<input type="radio" name="ch" id="charge" value=110>每月 USD$110
+					<input type="radio" name="charge" id="charge" value=20>每月 USD$20
+					<input type="radio" name="charge" id="charge" value=50>每月 USD$50
+					<input type="radio" name="charge" id="charge" value=80>每月 USD$80
+					<input type="radio" name="charge" id="charge" value=110>每月 USD$110
 				</td>
 			</tr>
 
 			<tr><td class="subtitle">電話服務</td>
 				<td colspan="2">
 					<label>是否辦理電話服務：
-						<input type="radio" name="ph" id="phone" value=1>是
-						<input type="radio" name="ph" id="phone" value=0>否
+						<input type="radio" name="phone" id="phone" value=1>是
+						<input type="radio" name="phone" id="phone" value=0>否
 					</label><br>
 					<label>是否辦理多個門號：
-						<input type="radio" name='mul' id="multiline" value=1>是
-						<input type="radio" name="mul" id="multiline" value=0>否
+						<input type="radio" name='multiline' id="multiline" value=1>是
+						<input type="radio" name="multiline" id="multiline" value=0>否
 					</label>
 				</td>
 			</tr>
@@ -146,9 +148,11 @@
 
 			<tr>
 				<td colspan="3">
-					<button onclick="pred()">預測</button>
-					<button onclick="submit()">提交</button>
-
+					<button type="button" onclick="pred()">預測</button>
+					<button type="submit" onclick="myfun()">提交</button>
+					<br><br><font size="2">親愛的業務，如您發現點擊「預測」按鈕一直無反應，請再次確認每一格是否都有填寫。</font>
+					
+				
 					<!-- <input type="button" name="Submit" value="提交" class="btn" onclick="submit()" /> -->
 
 				</td>
@@ -156,16 +160,12 @@
 
 		</tbody>
 	</table>
+</form>
 	</div>
-	<!-- </form> -->
+	
 
 </body>
 <script src="./js/index.js"></script>
 
-<!-- <script>
-	function alertEvent() {
-		alert("這個人很有可能流失!\n預計待的時長為8個月。\n這個客戶屬於我們規劃的喜歡嘗試型。建議在3個月後，可以推出精彩優惠方案，吸引此客戶續約，提高客戶終身價值。");
-	}
-</script> -->
 
 </html>

@@ -52,8 +52,8 @@ function pred(){
     const senior = Number(document.querySelector('input[name="senior"]:checked').value);
     const partner = Number(document.querySelector('input[name="partner"]:checked').value);
     const depen = Number(document.querySelector('input[name="dependent"]:checked').value);
-    const phone = Number(document.querySelector('input[name="ph"]:checked').value);
-    const multiline = Number(document.querySelector('input[name="mul"]:checked').value);
+    const phone = Number(document.querySelector('input[name="phone"]:checked').value);
+    const multiline = Number(document.querySelector('input[name="multiline"]:checked').value);
     const paper = Number(document.querySelector('input[name="nopaper"]:checked').value);
 
     // 兩個以上的旋鈕
@@ -113,7 +113,7 @@ function pred(){
 
 
     // 計算月費，每一個額外服務是10元美金(這邊只是PoC)
-    const charge = Number(document.querySelector('input[name="ch"]:checked').value) + (security+backup+protection+support+tv+movie)*10
+    const charge = Number(document.querySelector('input[name="charge"]:checked').value) + (security+backup+protection+support+tv+movie)*10
     // 利用迴歸式來計算客戶停留時間
     const t = 1.17282 + 0.05372*senior + 0.11718*partner - 0.05134*phone + 0.15426*multiline + 0.05033*fiber
               + 0.05712*noInternet + 0.26347*year1 + 0.38546*year2 + 0.12742*security + 0.14223*backup + 0.08172*protection
@@ -148,8 +148,11 @@ function pred(){
     
     // console.log(data);  這邊的用途在於測試
     
-    // 如果要用local測試的話，記得要先去run後端的程式碼，這裡才跑得動，下面這一行是 local 
+    // 下面這一行是 local，如果要用local測試的話，記得要先去run後端的程式碼，這裡才跑得動
     // postData('http://127.0.0.1:3000/predict', data) 
+
+    //改成把後端部屬到GCP的VM降低延遲，提高scaling能力
+    postData('http://34.173.192.9/predict', data)
 
     // 下面這一行是我把後端部屬到heroku
     postData('https://telco-customer-churn-alice.herokuapp.com/predict', data)
@@ -176,12 +179,13 @@ function pred(){
     } 
 }
 
-function submit(){
-    if(document.getElementById("name").value.length == 0){
-        alert("請輸入姓名~");
-        return;
-    }
-    window.open('subPage.html')
-}
+function myfun() {
+    window.open('subPage.html')}
 
-// document.getElementById('resultText').innerHTML=predictType(result);
+function required(inputtx) {
+    if (inputtx.value.length == 0){ 
+        alert("message");  	
+        return false; 
+    }  	
+    return true; 
+    } 
